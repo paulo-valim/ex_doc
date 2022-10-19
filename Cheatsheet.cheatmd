@@ -94,10 +94,6 @@ end)
 ```
 - `code`
 
-A highlight section!
-This is a section with `{: .prime}`. Notice the fancy highlight! Great for "getting started" kind of snippets.
-{: .prime}
-
 ### H3 title
 
 Every box is an H3 title. The box will encompass everything inside the body of the H3.
