@@ -1,0 +1,112 @@
+# Elixir's Control Flow
+
+This document is a cheatsheet about the `if`, `cond` and `case` control flow structures.
+
+
+## `if`, `unless`, `cond` and `case`
+{:, .col-2}
+
+
+### `if`
+
+`if` statements are only effective for up tp two paths, that is, only one condition will be checked.
+
+
+#### Is it gym day today?
+
+Imagine you want to check if it's a weekday or weekend. If it's a weekday, you go to the gym. If it's a weekend, you get to stay home and rest.
+
+
+#### Translating it into code
+````
+day = :weekday
+
+if day == :weekday do
+  "Get ready for the gym!"
+else
+  "Stay at home and rest."
+end
+
+"Get ready for the gym!"
+````
+#### `if` evaluates a `true` statement.
+
+
+### `unless`
+
+`unless` like the `if` statement only checks for one condition, in this case returns `false` or `nil`
+
+
+#### Is it time to start going to the gym?
+
+Let's say that unless is weekend you have to go to work.
+
+
+#### Translating it into code
+````
+day = :weekday
+
+unless day == :weekday do
+  "You can stay in bed today"
+else
+  "You have work to do. Wake up!"
+end
+
+"You have work to do. Wake up!"
+````
+#### `unless` evaluates a `false` or `nil` statement.
+
+
+### `case`
+
+`case` is a control flow structure that allows you to define a series of cases that work well with pattern matching.
+
+#### Let's improve our gym schedule?
+Now what we want is to set the alarm to go to the gym not based on weekdays or weekends but one for each weekday: Monday, Tuesday, Wednesday, and so on.
+
+#### Translating it into code
+```` 
+#change to :monday, :tuesday (...) to see a different result.
+day = :wednesday
+
+case day do
+  :monday -> "set the alarm to 7am"
+  :tuesday -> "set the alarm to 8am"
+  :wednesday -> "set the alarm to 7pm"
+  :thursday -> "set the alarm to 5pm"
+  :friday -> "set the alarm to 6am" 
+end
+
+"set the alarm to 7pm"
+````
+#### case s2 pattern matching
+
+### `cond`
+
+`cond`stands for condition. `cond` is used for control flow with many paths that does not work well with pattern matching.
+
+#### How much should I exercise today?
+
+Let's build an app that will tell us how many calories we have consumed daily and how many minutes we should run on the treadmill. 
+
+#### Translating it into code
+````
+calories = 2500
+
+cond do 
+  calories >= 5000 -> "Today you must run 60 min"
+  calories >= 4000 -> "Today you must run 45 min"
+  calories >= 3000 -> "Today you must run 30 min"
+  calories >= 2000 -> "Today you must run 15 min"
+end
+
+"Today you must run 15 min"
+````
+
+`cond` will check for a truth value, return the first `true` condition, and stop running. This means that the order of the conditions matters.
+
+If no truth value is found, `cond` will raise an error.
+
+#### Remember the order of the conditions matter!
+
+
