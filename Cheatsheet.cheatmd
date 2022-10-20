@@ -78,4 +78,72 @@ end
 
 `cond` is used for control flow with many paths that does not work well with pattern matching.
 
+### `CaseClauseError` and `CondClauseError`
 
+If none of the clauses match, an error is raised:
+
+#### `case`
+
+````
+day = :saturday
+
+case day do
+  :monday -> "set the alarm to 7am"
+  :tuesday -> "set the alarm to 8am"
+  :wednesday -> "set the alarm to 7pm"
+  :thursday -> "set the alarm to 5pm"
+  :friday -> "set the alarm to 6am" 
+end
+
+**(CaseClauseError) no case clause matching: :ok
+````
+
+#### `cond`
+````
+calories = 500
+
+cond do 
+  calories >= 5000 -> "Today you must run 60 min"
+  calories >= 4000 -> "Today you must run 45 min"
+  calories >= 3000 -> "Today you must run 30 min"
+  calories >= 2000 -> "Today you must run 15 min"
+end
+
+**(CondClauseError) no cond clause evaluated to a truthy value
+````
+
+### Guards
+
+To avoid `errors` you can always make use of `guards`, that means, if no condition is met the guard will be retun. 
+
+#### `case`
+
+````
+day = :saturday
+
+case day do
+  :monday -> "set the alarm to 7am"
+  :tuesday -> "set the alarm to 8am"
+  :wednesday -> "set the alarm to 7pm"
+  :thursday -> "set the alarm to 5pm"
+  :friday -> "set the alarm to 6am"
+  _ -> "Is not a weekday" 
+end
+
+"Is not a weekday"
+````
+
+#### `cond`
+````
+calories = 500
+
+cond do 
+  calories >= 5000 -> "Today you must run 60 min"
+  calories >= 4000 -> "Today you must run 45 min"
+  calories >= 3000 -> "Today you must run 30 min"
+  calories >= 2000 -> "Today you must run 15 min"
+  true -> "Not enough calories to exercise"
+end
+
+"Not enough calories to exercise"
+````
