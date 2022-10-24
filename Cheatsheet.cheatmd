@@ -1,149 +1,157 @@
-# Elixir's Control Flow
+# Built-in Elixir Modules
 
-This document is a cheatsheet about the `if`, `cond` and `case` control flow structures.
+A cheatsheet with a list of the somewhat most important Built-in Elixir Module to keep it close at all times.
 
-
-## `if`, `unless`, `cond` and `case`
+## The Kernel Module
 {:, .col-2}
 
-
-### `if`
-
-#### Is it gym day today?
-````
-day = :weekday
-
-if day == :weekday do
-  "Get ready for the gym!"
-else
-  "Stay at home and rest."
-end
-
-"Get ready for the gym!"
-````
-`if` evaluates a `true` statement for up to two paths.
-
-
-### `unless`
-
-#### Do I really have to wake up?
-````
-day = :weekday
-
-unless day == :weekday do
-  "You can stay in bed today"
-else
-  "You have work to do. Wake up!"
-end
-
-"You have work to do. Wake up!"
-````
-`unless` evaluates a `false` or `nil` statement, for up to two paths.
-
-
-### `case`
-
-#### Building a gym schedule!
-```` 
-#change to :monday, :tuesday (...) to see a different result.
-day = :wednesday
-
-case day do
-  :monday -> "set the alarm to 7am"
-  :tuesday -> "set the alarm to 8am"
-  :wednesday -> "set the alarm to 7pm"
-  :thursday -> "set the alarm to 5pm"
-  :friday -> "set the alarm to 6am" 
-end
-
-"set the alarm to 7pm"
-````
-`case` is a control flow structure that allows you to define a series of cases that work well with pattern matching.
-
-### `cond`
-
-#### How much should I exercise today?
-````
-calories = 2500
-
-cond do 
-  calories >= 5000 -> "Today you must run 60 min"
-  calories >= 4000 -> "Today you must run 45 min"
-  calories >= 3000 -> "Today you must run 30 min"
-  calories >= 2000 -> "Today you must run 15 min"
-end
-
-"Today you must run 15 min"
-````
-
-`cond` is used for control flow with many paths that does not work well with pattern matching.
-
-### `CaseClauseError` and `CondClauseError`
-
-If none of the clauses match, an error is raised:
-
-#### `case`
+### `elem/2` 
+Retrieve an element from a tuple given an index.
 
 ````
-day = :saturday
-
-case day do
-  :monday -> "set the alarm to 7am"
-  :tuesday -> "set the alarm to 8am"
-  :wednesday -> "set the alarm to 7pm"
-  :thursday -> "set the alarm to 5pm"
-  :friday -> "set the alarm to 6am" 
-end
-
-**(CaseClauseError) no case clause matching: :ok
+Kernel.elem({3, 6, 9}, 0)
+3
 ````
 
-#### `cond`
-````
-calories = 500
+### `is_atom/1`, `is_binary/1`
+... `is_map/1`, and `is_integer/1` and etc. 
 
-cond do 
-  calories >= 5000 -> "Today you must run 60 min"
-  calories >= 4000 -> "Today you must run 45 min"
-  calories >= 3000 -> "Today you must run 30 min"
-  calories >= 2000 -> "Today you must run 15 min"
-end
-
-**(CondClauseError) no cond clause evaluated to a truthy value
-````
-
-### Guards
-
-To avoid `errors` you can always make use of `guards`, that means, if no condition is met the guard will be retun. 
-
-#### `case`
+Checks the types of each value retun `true` or `false`.
 
 ````
-day = :saturday
-
-case day do
-  :monday -> "set the alarm to 7am"
-  :tuesday -> "set the alarm to 8am"
-  :wednesday -> "set the alarm to 7pm"
-  :thursday -> "set the alarm to 5pm"
-  :friday -> "set the alarm to 6am"
-  _ -> "Is not a weekday" 
-end
-
-"Is not a weekday"
+is_atom({3, 6, 9})
+false
+````
+````
+is_integer(3)
+true
 ````
 
-#### `cond`
-````
-calories = 500
+### `max/2` and `min/2`  
+Return the largest (max) or the smallest (min) value between two numbers.
 
-cond do 
-  calories >= 5000 -> "Today you must run 60 min"
-  calories >= 4000 -> "Today you must run 45 min"
-  calories >= 3000 -> "Today you must run 30 min"
-  calories >= 2000 -> "Today you must run 15 min"
-  true -> "Not enough calories to exercise"
-end
 
-"Not enough calories to exercise"
 ````
+max(100, 200)
+200
+````
+````
+min(-10, 0)
+-10
+````
+
+### `inspect/2`
+Convert any Elixir term into a string.
+````
+inspect(%{})
+"%{}"
+````
+````
+map = %{}
+"#{inspect(map)}"
+"%{}"
+````
+
+## The Interger Module
+{:, .col-2}
+
+### `Interger.digits/2`
+Returns the ordered digits for the given`integer`.
+
+````
+Integer.digits(123_456_789)
+[1, 2, 3, 4, 5, 6, 7, 8, 9]
+````
+````
+Integer.digits([1, 2, 3, 4, 5, 6, 7, 8, 9])
+123456789
+````
+
+### `parse/2`
+Parses a text representation of an integer.
+
+````
+Integer.parse("34")
+{34, ""}
+````
+````
+Integer.parse("34.5")
+{34, ".5"}
+````
+````
+Integer.parse("three")
+:error
+````
+
+## The String Module
+{:, .col-2}
+
+#### Indexes
+You can imagine a string like a list of characters. However, be warned this is only a mental model, strings are not actually implemented as lists they are implemented as binaries.
+
+ | subgraph Characters | subgraph Indexes | 
+ |:-:|:-:|
+ | H | 0 |
+ | E | 1 |
+ | L | 2 |
+ | L | 3 |
+ | O | 4 |
+ 
+### `String.at/2`
+Returns the grapheme at the position of the given UTF-8 string. If position is greater than string length, then it returns `nil`.
+
+ ```
+ String.at("hello", 2)
+ "l"
+```
+### `String.contains?/2`
+Searches if string contains any of the given contents.
+
+```
+String.contains?("Hello", "lo")
+true
+```
+
+### `String.captalize/2`
+Converts the first character in the given string to uppercase and the remainder to lowercase according to mode.
+
+```
+String.captalize("hello")
+"Hello"
+```
+
+### `String.upcase/2`
+Converts all characters in the given string to uppercase according to mode.
+
+````
+String.upcase("hello")
+"HELLO"
+````
+
+### `String.downcase/2`
+Converts all characters in the given string to lowercase according to mode.
+
+````
+String.downcase("HELLO")
+"hello"
+````
+
+### `String.split/3`
+Divides a string into parts based on a pattern.
+
+````
+String.split("have,a,great,day", ",")
+["have", "a", "great", "day"]
+````
+
+### `String.trim/1`
+Returns a string where all leading and trailing Unicode whitespaces have been removed.
+
+```
+String.trim(" hello! ")
+"hello!"
+```
+
+## The List Module
+
+
