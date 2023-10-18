@@ -38,17 +38,6 @@ body {
   z-index: 4;
 }
 
-.sidebar-button {
-  --sidebarButtonTopOpen: 6px;
-  --sidebarButtonRightOpen: 7px;
-  position: fixed;
-  z-index: 99;
-  left: 0;
-  top: 0;
-  transition: all var(--sidebarTransitionDuration) ease-in-out;
-  will-change: transform;
-  margin-top: 6px;
-}
 
 .content {
   width: calc(100% - var(--sidebarWidth));
@@ -56,13 +45,6 @@ body {
   height: 100%;
   position: absolute;
   z-index: 3;
-}
-
-body:is(.sidebar-opening, .sidebar-opened) .sidebar-button {
-  transform: translateX(
-    calc(var(--sidebarWidth) - 100% - var(--sidebarButtonRightOpen))
-  );
-  top: var(--sidebarButtonTopOpen);
 }
 
 body.sidebar-opening-start .sidebar {
@@ -124,12 +106,26 @@ body.sidebar-closed .content {
   min-height: 100%;
 }
 
+body.search-focused .search-bar .search-close-button {
+  transform: scaleY(1);
+  transition: transform 0.15s ease-out 0.15s;
+}
+
 @media screen and (max-width: 768px) {
+  .searchbar-button {
+    display: none;
+  }
 
   .sidebar-button {
+    --sidebarButtonTopOpen: 6px;
+    --sidebarButtonRightOpen: 7px;
     position: absolute;
+    z-index: 990;
     top: 4px;
     left: -1px;
+    transition: all var(--sidebarTransitionDuration) ease-in-out;
+    will-change: transform;
+    margin-top: 6px;
   }
 
   .sidebar-button:before {
@@ -146,6 +142,13 @@ body.sidebar-closed .content {
     transition: top var(--sidebarTransitionDuration) ease-in-out;
   }
 
+  body:is(.sidebar-opening, .sidebar-opened) .sidebar-button {
+    transform: translateX(
+      calc(var(--sidebarWidth) - 100% - var(--sidebarButtonRightOpen))
+    );
+    top: var(--sidebarButtonTopOpen);
+  }
+
   body:is(.sidebar-closed, .sidebar-closing) .sidebar-button:before {
     top: 0;
   }
@@ -157,14 +160,7 @@ body.sidebar-closed .content {
   body.sidebar-opened .sidebar-button:before {
     opacity: 0;
   }
-}
 
-body.search-focused .search-bar .search-close-button {
-  transform: scaleY(1);
-  transition: transform 0.15s ease-out 0.15s;
-}
-
-@media screen and (max-width: 768px) {
   .content,
   body.sidebar-opening .content {
     left: 0;
@@ -177,3 +173,11 @@ body.search-focused .search-bar .search-close-button {
     overflow-x: auto;
   }
 }
+
+@media screen and (min-width: 769px) {
+  .sidebar-button {
+    display: none;
+  }
+}
+
+

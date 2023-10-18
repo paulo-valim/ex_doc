@@ -6,6 +6,7 @@ const ANIMATION_DURATION = 300
 
 const SIDEBAR_TOGGLE_SELECTOR = '.sidebar-toggle'
 const CONTENT_SELECTOR = '.content'
+const SEARCHBAR_TOGGLE_SELECTOR = '.searchbar-toggle'
 
 const userPref = {
   CLOSED: 'closed',
@@ -67,6 +68,13 @@ function addEventListeners () {
   qs(SIDEBAR_TOGGLE_SELECTOR).addEventListener('click', (event) => {
     toggleSidebar()
     setPreference()
+    toggleIcon('sidebar-icon')
+  })
+
+  qs(SEARCHBAR_TOGGLE_SELECTOR).addEventListener('click', (event) => {
+    toggleSidebar()
+    setPreference()
+    toggleIcon('searchbar-icon')
   })
 
   qs(CONTENT_SELECTOR).addEventListener('click', (event) => {
@@ -202,5 +210,20 @@ function setPreference () {
       isSidebarOpen()
         ? (state.sidebarPreference = userPref.OPEN)
         : (state.sidebarPreference = userPref.CLOSED)
+  }
+}
+
+function toggleIcon (iconId) {
+  const icon = document.getElementById(iconId)
+
+  // Check the current class of the icon
+  if (icon.classList.contains('ri-menu-unfold-line')) {
+    // If it has the 'ri-menu-unfold-line' class, change it to the new icon class
+    icon.classList.remove('ri-menu-unfold-line')
+    icon.classList.add('ri-menu-fold-line')
+  } else {
+    // If it has the 'ri-menu-fold-line' class, change it back to the original icon class
+    icon.classList.remove('ri-menu-fold-line')
+    icon.classList.add('ri-menu-unfold-line')
   }
 }

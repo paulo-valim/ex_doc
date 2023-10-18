@@ -147,7 +147,6 @@
   color: var(--sidebarAccentMain);
 }
 
-
 .sidebar .sidebar-tabpanel {
   flex: 1 1 .01%;
   overflow-y: auto;
@@ -383,27 +382,6 @@
   border: 3px solid var(--sidebarBackground);
 }
 
-.sidebar-button {
-  cursor: pointer;
-  background-color: transparent;
-  border: none;
-  padding: 15px 11px;
-  font-size: var(--sidebarFontSize);
-}
-
-.sidebar-button:hover {
-  color: var(--sidebarHover);
-}
-
-.sidebar-button {
-  color: var(--sidebarAccentMain);
-}
-
-.sidebar-closed .sidebar-button {
-  color: var(--contrast);
-  margin: 12px 8px 8px 8px;
-}
-
 @media screen and (max-height: 500px) {
   .sidebar {
     overflow-y: auto;
@@ -415,6 +393,28 @@
 }
 
 @media screen and (max-width: 768px) {
+
+  .sidebar-button {
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 15px 11px;
+    font-size: var(--sidebarFontSize);
+  }
+
+  .sidebar-button:hover {
+    color: var(--sidebarHover);
+  }
+  
+  .sidebar-button {
+    color: var(--sidebarAccentMain);
+  }
+  
+  .sidebar-closed .sidebar-button {
+    color: var(--contrast);
+    margin: 12px 8px 8px 8px;
+  }
+
   .sidebar-closed .sidebar-button {
     margin: 8px;
   }  

@@ -7,6 +7,15 @@
   align-items: center;
 }
 
+.search-settings .searchbar-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 10px 22px 10px 0;
+  justify-content: flex-start;
+  font-size: var(--sidebarFontSize);
+}
+
 .search-bar {
   border: 1px solid var(--searchBarBorder);
   border-radius: 8px;
@@ -95,7 +104,6 @@
 
 .top-search .search-settings .icon-settings {
   font-size: 20px;
-  width: 4%;
   float: right;
   color: var(--iconAction);
   text-decoration: none;
@@ -103,7 +111,7 @@
   transition: color .3s ease-in-out;
   background-color: transparent;
   cursor: pointer;
-  padding: 1px 0px 1px 5px;
+  padding: 10px 0px 10px 23px;
 }
 
 .top-search .search-settings .icon-settings:hover {
@@ -116,7 +124,6 @@
 @media (max-width: 480px) {
   .search-bar {
     width: 90%;
-    margin-left: 35px;
   }
 
   .top-search .search-settings .icon-settings {
@@ -126,17 +133,21 @@
 
 @media (min-width: 481px) and (max-width: 768px) {
   .search-bar {
-    width: 95%;
-    margin-left: 35px;
+    width: 93%;
   }
 
   .top-search .search-settings .icon-settings {
-    width: 5%;
+    width: 7%;
   }
 }
 
 @media (max-width: 768px) {
   .top-search {
     margin-top: 0;
+    margin-left: 35px;
+  }
+
+  .search-settings .searchbar-button {
+    display: none;
   }
 }

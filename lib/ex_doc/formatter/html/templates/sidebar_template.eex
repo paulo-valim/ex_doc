@@ -1,7 +1,7 @@
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
-  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+      <i class="ri-menu-unfold-line ri-lg" id="sidebar-icon" title="Collapse/expand sidebar"></i>
 </button>
 
 <nav id="sidebar" class="sidebar">
@@ -68,6 +68,9 @@
     <div id="content" class="content-inner">
       <div class="top-search">
         <div class="search-settings">
+          <button class="searchbar-button searchbar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+            <i class="ri-menu-unfold-line ri-lg" id="searchbar-icon" title="Collapse/expand sidebar"></i>
+          </button>
           <form class="search-bar" action="search.html">
             <label class="search-label">
               <span class="sr-only">Search documentation of <%= config.project %></span>
