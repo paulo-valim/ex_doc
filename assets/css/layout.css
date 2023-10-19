@@ -121,7 +121,7 @@ body.search-focused .search-bar .search-close-button {
     --sidebarButtonRightOpen: 7px;
     position: absolute;
     z-index: 990;
-    top: 4px;
+    top: 3px;
     left: -1px;
     transition: all var(--sidebarTransitionDuration) ease-in-out;
     will-change: transform;
