@@ -86,7 +86,7 @@ function isHrefToSelf (href) {
   return currentPage === targetPage
 }
 
-function handleHoverStart (element) {
+export function handleHoverStart (element) {
   if (!shouldShowTooltips()) { return }
 
   state.currentLinkElement = element

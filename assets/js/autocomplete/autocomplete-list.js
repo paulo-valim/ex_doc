@@ -1,5 +1,6 @@
 import { getSuggestions } from './suggestions'
 import { isBlank, qs } from '../helpers'
+import { getHint } from '../tooltips/hints.js'
 
 export const AUTOCOMPLETE_CONTAINER_SELECTOR = '.autocomplete'
 export const AUTOCOMPLETE_SUGGESTION_LIST_SELECTOR = '.autocomplete-suggestions'
@@ -38,17 +39,42 @@ export function isAutocompleteListOpen () {
  *
  * @param {String} searchTerm The term to show suggestions for.
  */
+
 export function updateAutocompleteList (searchTerm) {
   state.autocompleteSuggestions = getSuggestions(searchTerm)
   state.selectedIdx = -1
 
   if (!isBlank(searchTerm)) {
     renderSuggestions({ term: searchTerm, suggestions: state.autocompleteSuggestions })
-    // Highlight the first option
     moveAutocompleteSelection(0)
     showAutocompleteList()
+
+    if (state.autocompleteSuggestions.length > 0) {
+      triggerTooltipForFirstSuggestion()
+    }
   } else {
     hideAutocompleteList()
+  }
+}
+
+function triggerTooltipForFirstSuggestion () {
+  const firstSuggestionElement = document.querySelector(AUTOCOMPLETE_SUGGESTION_SELECTOR + ':first-child')
+  if (firstSuggestionElement) {
+    getHint(firstSuggestionElement.href)
+      .then(hint => {
+        updateIframeWithHint(hint)
+      })
+      .catch(error => {
+        console.error('Error fetching hint:', error)
+      })
+  }
+}
+
+function updateIframeWithHint (hint) {
+  const iframe = document.getElementById('autocompleteHintIframe')
+  if (iframe && hint) {
+    // Assuming 'hint' contains a URL or some content to display in the iframe
+    iframe.src = hint.description // or use a different property of 'hint' as needed
   }
 }
 
